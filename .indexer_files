@@ -1,3 +1,6 @@
 --------------- ~/.indexer_files ---------------  
 # [linux] 
 # /Users/jian.cao/workspace/linux/
+
+[aml_kernel]
+/home/jian.cao/workspace/kernel/common/

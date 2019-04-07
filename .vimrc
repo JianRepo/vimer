@@ -1,6 +1,6 @@
 " 引入tags
 set tags+=/Users/jian.cao/.indexer_files_tags/linux
-
+" set
 " 定义快捷键的前缀，即<Leader>
 let mapleader=";"
 " 开启实时搜索功能
@@ -47,6 +47,7 @@ colorscheme solarized
 " colorscheme phd
 " 设置状态栏主题风格
 let g:Powerline_colorscheme='solarized256'
+set t_Co=256 
 
 " 禁止光标闪烁
 set gcr=a:block-blinkon0
@@ -70,7 +71,7 @@ set cursorcolumn
 " 高亮显示搜索结果
 set hlsearch
 " 设置 gvim 显示字体
-" set guifont=Consolas:h20
+" set guifont=Consolas\ 20
 " 禁止折行
 set nowrap
 
@@ -171,7 +172,8 @@ nmap <Leader>w :w<CR>
 
 " 使用 ctrlsf.vim 插件在工程内全局查找光标所在关键字，设置快捷键。快捷键速记法：search in project
 nnoremap <Leader>s :CtrlSF<CR>
-
+" 指定搜索工具
+let g:ctrlsf_ackprg = 'ack'
 
 
 " YCM 补全菜单配色
@@ -198,6 +200,13 @@ let g:ycm_cache_omnifunc=0
 " 语法关键字补全			
 let g:ycm_seed_identifiers_with_syntax=1
 " let g:ycm_use_clangd = 0
+" 指定python版本
+let g:ycm_server_python_interpreter='/usr/bin/python'
+" 指定.ycm_extra_conf.py
+let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+
+
+
 
 " +-----------------------------------+
 " C风格注释
