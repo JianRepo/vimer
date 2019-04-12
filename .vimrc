@@ -1,6 +1,8 @@
 " 引入tags
-set tags+=/Users/jian.cao/.indexer_files_tags/linux
-" set
+set tags+=/Users/jian.cao/.indexer_fles_tags/linux 
+set tags+=/home/jian.cao/workspace/kernel/common/tags
+set tags+=/home/jian.cao/workspace/my_build/arm_isp/gdc_test/gdc_to_ge2d_test_for_gdc_fw/tags
+set tags+=/home/jian.cao/workspace/eureka/chrome/vendor/amlogic/common/libge2d/tags
 " 定义快捷键的前缀，即<Leader>
 let mapleader=";"
 " 开启实时搜索功能
@@ -23,7 +25,8 @@ call vundle#begin()
 " #########################################
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'Lokaltog/vim-powerline'
+Plugin 'tomasr/molokai'
+Plugin 'vim-scripts/phd'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/indexer.tar.gz'
@@ -33,8 +36,10 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'dyng/ctrlsf.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'vim-scripts/DrawIt'
-Plugin 'fholgado/minibufexpl.vim'
 Plugin 'scrooloose/nerdcommenter'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 " #########################################
 " 插件列表结束
 call vundle#end()
@@ -42,12 +47,15 @@ filetype plugin indent on
 
 " 配色方案
 set background=dark
-colorscheme solarized
-" colorscheme molokai
+" colorscheme solarized
+colorscheme molokai
 " colorscheme phd
 " 设置状态栏主题风格
-let g:Powerline_colorscheme='solarized256'
-set t_Co=256 
+" let g:Powerline_colorscheme='solarized256'
+set t_Co=256
+" let g:solarized_termcolors=256
+let g:molokai_original = 1
+let g:rehash256 = 1
 
 " 禁止光标闪烁
 set gcr=a:block-blinkon0
@@ -60,7 +68,7 @@ set guioptions-=R
 set guioptions-=m
 set guioptions-=T
 " 总是显示状态栏
-set laststatus=2
+" set laststatus=2
 " 显示光标当前位置
 set ruler
 " 开启行号显示
@@ -68,10 +76,13 @@ set number
 " 高亮显示当前行/列
 set cursorline
 set cursorcolumn
+" highlight CursorLine   cterm=NONE ctermbg=black ctermfg=red guibg=black guifg=red
+" highlight CursorColumn cterm=NONE ctermbg=black ctermfg=red guibg=black guifg=red
+
 " 高亮显示搜索结果
 set hlsearch
 " 设置 gvim 显示字体
-" set guifont=Consolas\ 20
+" set guifont=Inconsolata\ Nerd\ Font\ Complete\ Windows\ Compatible\ 20
 " 禁止折行
 set nowrap
 
@@ -83,7 +94,7 @@ syntax on
 " 自适应不同语言的智能缩进
 filetype indent on
 " 将制表符扩展为空格
-set expandtab
+" set expandtab
 " 设置编辑时制表符占用空格数
 set tabstop=8
 " 设置格式化时制表符占用空格数
@@ -166,14 +177,14 @@ nmap <Leader>w :w<CR>
 " 定义快捷键在结对符之间跳转
 " nmap <Leader>M %
 
-"nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR>
 " 只能是 #include 或已打开的文件
-"nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
 
 " 使用 ctrlsf.vim 插件在工程内全局查找光标所在关键字，设置快捷键。快捷键速记法：search in project
 nnoremap <Leader>s :CtrlSF<CR>
 " 指定搜索工具
-let g:ctrlsf_ackprg = 'ack'
+let g:ctrlsf_ackprg = 'ag'
 
 
 " YCM 补全菜单配色
@@ -197,16 +208,46 @@ set completeopt-=preview
 let g:ycm_min_num_of_chars_for_completion=1
 " 禁止缓存匹配项，每次都重新生成匹配项
 let g:ycm_cache_omnifunc=0
-" 语法关键字补全			
+" 语法关键字补全
 let g:ycm_seed_identifiers_with_syntax=1
 " let g:ycm_use_clangd = 0
 " 指定python版本
 let g:ycm_server_python_interpreter='/usr/bin/python'
 " 指定.ycm_extra_conf.py
-let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
+" let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 
 
+" 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
+nmap <Leader>n :NERDTreeToggle<CR>
+" 设置NERDTree子窗口宽度
+let NERDTreeWinSize=32
+" 设置NERDTree子窗口位置
+let NERDTreeWinPos="right"
+" 显示隐藏文件
+let NERDTreeShowHidden=1
+" NERDTree 子窗口中不显示冗余帮助信息
+let NERDTreeMinimalUI=1
+" 删除文件时自动删除文件对应 buffer
+let NERDTreeAutoDeleteBuffer=1
 
+let g:gitgutter_max_signs=1500
+
+" set encoding=utf-8
+" set langmenu=zh_CN.UTF-8
+" set ambiwidth=double "防止特殊符号无法正常显示
+set laststatus=2  "永远显示状态栏
+let g:airline_powerline_fonts=1  " 支持 powerline 字体
+let g:airline#extensions#tabline#enabled=1 " 显示窗口tab和buffer
+" 设置tab键映射
+nmap <tab> :bn<cr>
+" 'papercolor'  " air line theme
+let g:airline_theme='papercolor' " 'base16'
+" 关闭状态栏whitespace提示
+let g:airline#extensions#whitespace#enabled=0
+
+" set listchars=tab:»\ ,space:·,trail:•,extends:»,precedes:« " Unprintable chars mapping
+set listchars=tab:»\ ,trail:█,extends:»,precedes:« " Unprintable chars mapping
+set list          " Display unprintable characters
 
 " +-----------------------------------+
 " C风格注释
@@ -217,3 +258,4 @@ let g:ycm_global_ycm_extra_conf='~/.ycm_extra_conf.py'
 " 画图注释
 " :Distart
 " +-----------------------------------+
+

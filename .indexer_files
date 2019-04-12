@@ -2,5 +2,7 @@
 # [linux] 
 # /Users/jian.cao/workspace/linux/
 
-[aml_kernel]
-/home/jian.cao/workspace/kernel/common/
+# [kernel]
+# option:ctags_params="--languages=c++,c"
+
+# /home/jian.cao/workspace/kernel/common/
