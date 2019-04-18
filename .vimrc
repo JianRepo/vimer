@@ -5,17 +5,6 @@ let system['isLinux'] = has('unix') && !has('macunix') && !has('win32unix')
 let system['isOSX'] = has('macunix')
 " -------------------
 
-" 引入tags
-if system.isLinux
-  set tags+=/Users/jian.cao/.indexer_fles_tags/linux
-  set tags+=/home/jian.cao/workspace/kernel/common/tags
-  set tags+=/home/jian.cao/workspace/my_build/arm_isp/gdc_test/gdc_to_ge2d_test_for_gdc_fw/tags
-  set tags+=/home/jian.cao/workspace/eureka/chrome/vendor/amlogic/common/libge2d/tags
-elseif system.isOSX
-  set tags+=/Users/jian.cao/workspace/linux/tags
-  set tags+=/Users/jian.cao/.vim/bundle/YouCompleteMe/tags
-endif
-
 " 定义快捷键的前缀，即<Leader>
 let mapleader=";"
 " 开启实时搜索功能
@@ -26,6 +15,8 @@ set ignorecase
 set nocompatible
 " vim 自身命令行模式智能补全
 set wildmenu
+"  关闭当前buffer
+nmap <Leader>bd :bd<CR>
 
 " 让配置变更立即生效
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
@@ -41,7 +32,6 @@ Plugin 'morhetz/gruvbox'
 Plugin 'whatyouhide/vim-gotham'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'tomasr/molokai'
-Plugin 'vim-scripts/phd'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'majutsushi/tagbar'
 Plugin 'vim-scripts/indexer.tar.gz'
@@ -88,10 +78,15 @@ set ruler
 " 开启行号显示
 set number
 " 高亮显示当前行/列
-set cursorline
-set cursorcolumn
+" set cursorline
+" set cursorcolumn
 " highlight CursorLine   cterm=NONE ctermbg=red ctermfg=NONE guibg=red guifg=NONE
 " highlight CursorColumn cterm=NONE ctermbg=red ctermfg=NONE guibg=red guifg=red
+
+" 80字符提示
+set textwidth=80
+set cc=+1
+" hi ColorColumn ctermbg=green guibg=green
 
 " 高亮显示搜索结果
 set hlsearch
@@ -126,6 +121,8 @@ set nofoldenable
 " 默认 --c++-kinds=+p+l，重新设置为 --c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v
 " 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl
 let g:indexer_ctagsCommandLineOptions="--c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
+let g:indexer_dontUpdateTagsIfFileExists = 1
+" let g:vimprj_changeCurDirIfVimprjFound = 1
 
 " 设置 tagbar 子窗口的位置出现在主编辑区的左边
 let tagbar_left=1
@@ -195,7 +192,7 @@ nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR>
 " 只能是 #include 或已打开的文件
 nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
 
-" 使用 ctrlsf.vim 插件在工程内全局查找光标所在关键字，设置快捷键。快捷键速记法：search in project
+" 使用 ctrlsf.vim 插件在工程内全局查找光标所在关键字，设置快捷键
 nnoremap <Leader>s :CtrlSF<CR>
 " 指定搜索工具
 let g:ctrlsf_ackprg = 'ag'
@@ -218,10 +215,14 @@ let g:gitgutter_max_signs=1500
 
 " set encoding=utf-8
 " set langmenu=zh_CN.UTF-8
-" set ambiwidth=double "防止特殊符号无法正常显示
-set laststatus=2  "永远显示状态栏
-let g:airline_powerline_fonts=1  " 支持 powerline 字体
-let g:airline#extensions#tabline#enabled=1 " 显示窗口tab和buffer
+"防止特殊符号无法正常显示
+" set ambiwidth=double
+"永远显示状态栏
+set laststatus=2
+" 支持 powerline 字体
+let g:airline_powerline_fonts=1
+" 显示窗口tab和buffer
+let g:airline#extensions#tabline#enabled=1
 " 设置tab键映射
 nmap <tab> :bn<cr>
 " 'papercolor'  " air line theme
@@ -232,12 +233,15 @@ let g:airline#extensions#whitespace#enabled=0
 if system.isOSX
   let g:clang_use_library=1
   let g:clang_library_path='/Users/jian.cao/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/clang/lib/' " '/usr/local/opt/llvm/lib'
-  " let g:clang_library_path='/Users/jian.cao/workspace/lib_tool' " '/usr/local/opt/llvm/lib'
+elseif system.isWindows
+  let g:clang_use_library=1
+  let g:clang_library_path='/home/jian.cao/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/clang/lib/' " '/usr/local/opt/llvm/lib'
 endif
 
-" set listchars=tab:»\ ,space:·,trail:•,extends:»,precedes:« " Unprintable chars mapping
-set listchars=tab:»\ ,trail:█,extends:»,precedes:« " Unprintable chars mapping
-set list          " Display unprintable characters
+" set listchars=tab:»\ ,space:·,trail:•,extends:»,precedes:«
+set listchars=tab:»\ ,space:·,trail:█,extends:»,precedes:«
+" Display unprintable characters
+set list
 
 nmap <Leader>lf :LeaderfFile<CR>
 nmap <Leader>lw :LeaderfFileCword<CR>
@@ -271,7 +275,7 @@ let g:ycm_seed_identifiers_with_syntax=1
 if system.isLinux
   let g:ycm_server_python_interpreter='/usr/bin/python'
 elseif system.isOSX
-  " let g:ycm_python_interpreter_path='/usr/local/bin/python3'  " '/usr/bin/python'
+  " python3-path '/usr/local/bin/python3'
   let g:ycm_python_interpreter_path='/usr/bin/python'
 endif
 
@@ -284,7 +288,7 @@ let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_enable_diagnostic_highlighting = 0
 
 " 指定.ycm_extra_conf.py
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 " let g:ycm_use_clangd = 0
 " debug for YCM
 " let g:ycm_server_keep_logfiles = 1

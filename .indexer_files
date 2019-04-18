@@ -1,8 +1,20 @@
 --------------- ~/.indexer_files ---------------  
-# [linux] 
-# /Users/jian.cao/workspace/linux/
+[google_ge2d]
+/mnt/fileroot/jian.cao/eureka/chrome/vendor/amlogic/common/libge2d
+[ge2d]
+/mnt/fileroot/jian.cao/buildroot/hardware/aml-4.9/amlogic/ge2d
 
-# [kernel]
-# option:ctags_params="--languages=c++,c"
+[uboot2015]
+/mnt/fileroot/jian.cao/uboot_2015_upload/bl33
 
-# /home/jian.cao/workspace/kernel/common/
+[kernek_4.9]
+/mnt/fileroot/jian.cao/kernel_4.9/common
+
+[kernel]
+/mnt/fileroot/jian.cao/kernel/common
+
+[%dir_name(/mnt/fileroot/jian.cao/osd)%]
+/mnt/fileroot/jian.cao/osd
+
+# [PROJECTS_PARENT]
+# /mnt/fileroot/jian.cao/
