@@ -1,4 +1,4 @@
-" dowload vim-plug and source it
+" download vim-plug and source it
 let $BUNDLE = expand("$HOME/.vim/bundle")
 let $PLUG_DIR = expand("$BUNDLE/vim-plug")
 
@@ -16,7 +16,7 @@ let system['isLinux'] = has('unix') && !has('macunix') && !has('win32unix')
 let system['isOSX'] = has('macunix')
 " -------------------
 
-" 定义快捷键的前缀，即<Leader>
+" 定义快捷键的前缀
 let mapleader=";"
 " 开启实时搜索功能
 set incsearch
