@@ -1,3 +1,14 @@
+" dowload vim-plug and source it
+let $BUNDLE = expand("$HOME/.vim/bundle")
+let $PLUG_DIR = expand("$BUNDLE/vim-plug")
+
+if empty(glob(expand("$PLUG_DIR/plug.vim")))
+  silent !curl -fLo $PLUG_DIR/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source ~/.vimrc
+endif
+source $PLUG_DIR/plug.vim
+
 " detect system
 let system = {}
 let system['isWindows'] = has('win16') || has('win32') || has('win64')
@@ -21,34 +32,29 @@ nmap <Leader>bd :bd<CR>
 " 让配置变更立即生效
 autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
-" vundle 环境设置
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-" vundle 管理的插件列表必须位于 vundle#begin() 和 vundle#end() 之间
-call vundle#begin()
+call plug#begin(expand($BUNDLE))
 " #########################################
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'morhetz/gruvbox'
-Plugin 'whatyouhide/vim-gotham'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'tomasr/molokai'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'majutsushi/tagbar'
-Plugin 'vim-scripts/indexer.tar.gz'
-Plugin 'vim-scripts/DfrankUtil'
-Plugin 'vim-scripts/vimprj'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'dyng/ctrlsf.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'vim-scripts/DrawIt'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'Yggdroot/LeaderF'
+Plug 'morhetz/gruvbox'
+Plug 'whatyouhide/vim-gotham'
+Plug 'altercation/vim-colors-solarized'
+Plug 'tomasr/molokai'
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'majutsushi/tagbar'
+Plug 'vim-scripts/indexer.tar.gz'
+Plug 'vim-scripts/DfrankUtil'
+Plug 'vim-scripts/vimprj'
+Plug 'Valloric/YouCompleteMe'
+Plug 'dyng/ctrlsf.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'vim-scripts/DrawIt'
+Plug 'scrooloose/nerdcommenter'
+Plug 'airblade/vim-gitgutter'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'Yggdroot/LeaderF'
 " #########################################
-" 插件列表结束
-call vundle#end()
+call plug#end()
 filetype plugin indent on
 
 " 配色方案
@@ -86,7 +92,7 @@ set number
 " 80字符提示
 set textwidth=80
 set cc=+1
-" hi ColorColumn ctermbg=green guibg=green
+" hi ColorColumn ctermbg=23 guibg=green
 
 " 高亮显示搜索结果
 set hlsearch
@@ -233,7 +239,7 @@ let g:airline#extensions#whitespace#enabled=0
 if system.isOSX
   let g:clang_use_library=1
   let g:clang_library_path='/Users/jian.cao/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/clang/lib/' " '/usr/local/opt/llvm/lib'
-elseif system.isWindows
+elseif system.isLinux
   let g:clang_use_library=1
   let g:clang_library_path='/home/jian.cao/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/clang/lib/' " '/usr/local/opt/llvm/lib'
 endif
