@@ -56,7 +56,7 @@ filetype plugin indent on
 set background=dark                           " 配色方案
 " set background=light
 colorscheme gruvbox
-" colorscheme gotham256
+" colorscheme gotham256                       " 夜间
 " colorscheme solarized
 " colorscheme molokai
 " colorscheme phd
@@ -106,6 +106,9 @@ nmap <Leader>w :w<CR>
 " nnoremap wk <C-W>k                          " 跳转至上方的子窗口
 " nnoremap wj <C-W>j                          " 跳转至下方的子窗口
 " nmap <Leader>M %                            " 定义快捷键在结对符之间跳转
+
+                                              " 上次关闭的位置
+autocmd BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 if system.isOSX
   let g:clang_use_library=1
@@ -162,32 +165,30 @@ let g:tagbar_type_cpp = {
          \ 'union'     : 'u'
      \ }
 \ }
-" PlugSetting -  ---------------------------------------------------------------
-
 
 " PlugSetting - ctrlsf ---------------------------------------------------------
 nnoremap <Leader>s :CtrlSF<CR>
-let g:ctrlsf_ackprg = 'ag'         " 指定搜索工具
+let g:ctrlsf_ackprg = 'ag'                           " 指定搜索工具
 
 " PlugSetting - nerdtree -------------------------------------------------------
 nmap <Leader>n :NERDTreeToggle<CR>
-let NERDTreeWinSize=25                             " 设置NERDTree子窗口宽度
-let NERDTreeWinPos="right"                         " 设置NERDTree子窗口位置
-let NERDTreeShowHidden=1                           " 显示隐藏文件
-let NERDTreeMinimalUI=1                            " NERDTree 子窗口中不显示冗余帮助信息
-let NERDTreeAutoDeleteBuffer=1                     " 删除文件时自动删除文件对应 buffer
-let NERDTreeStatusline='Nerdtree'                  " statusline string
-                                                   " 只剩nerdtree窗口时, 关闭vim
+let NERDTreeWinSize=25                               " 设置NERDTree子窗口宽度
+let NERDTreeWinPos="right"                           " 设置NERDTree子窗口位置
+let NERDTreeShowHidden=1                             " 显示隐藏文件
+let NERDTreeMinimalUI=1                              " NERDTree 子窗口中不显示冗余帮助信息
+let NERDTreeAutoDeleteBuffer=1                       " 删除文件时自动删除文件对应 buffer
+let NERDTreeStatusline='Nerdtree'                    " statusline string
+                                                     " 只剩nerdtree窗口时, 关闭vim
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " PlugSetting - gitgutter ------------------------------------------------------
 let g:gitgutter_max_signs=1500
 " PlugSetting - airline --------------------------------------------------------
-" nmap <tab> :bn<cr>                               " 设置tab键映射
-let g:airline_theme='tomorrow'                     " 'base16_google' 'tomorrow' 'base16_spacemacs' 'base16_monokai' 'papercolor' 'base16' 'papercolor'
-let g:airline_powerline_fonts = 1                  " 使用powerline字体
+" nmap <tab> :bn<cr>                                 " 设置tab键映射
+let g:airline_theme='base16'                         " 'base16_google' 'tomorrow' 'base16_spacemacs' 'base16_monokai' 'papercolor' 'base16'
+let g:airline_powerline_fonts = 1                    " 使用powerline字体
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#whitespace#enabled=0      " 关闭状态栏whitespace提示
+let g:airline#extensions#whitespace#enabled=0        " 关闭状态栏whitespace提示
 " let g:airline#extensions#tabline#show_tab_type = 1 " 打开下面这个选项会显示标签类型-->去掉右上角[buffers]
 
 let g:airline#extensions#tabline#buffer_idx_mode = 1
@@ -220,7 +221,7 @@ nmap <Leader>lf :LeaderfFile<CR>
 let g:Lf_StlSeparator = { 'left': '⮀', 'right': '⮂' }
 
 " PlugSetting - youcompleteme  -------------------------------------------------
-                                              " 只能是 #include 或已打开的文件
+                                                             " 只能是 #include 或已打开的文件
 nnoremap <leader>jc :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>jd :YcmCompleter GoToDefinition<CR>
 
