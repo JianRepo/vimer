@@ -34,7 +34,7 @@ autocmd BufWritePost $MYVIMRC source $MYVIMRC
 
 filetype off
 call plug#begin(expand($BUNDLE))
-" #########################################
+" -------------------
 Plug 'morhetz/gruvbox'
 Plug 'whatyouhide/vim-gotham'
 Plug 'altercation/vim-colors-solarized'
@@ -53,7 +53,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'Yggdroot/LeaderF'
-" #########################################
+" -------------------
 call plug#end()
 filetype plugin indent on
 
@@ -116,6 +116,8 @@ set tabstop=8
 set shiftwidth=8
 " 让 vim 把连续数量的空格视为一个制表符
 set softtabstop=8
+" paste 模式
+set pastetoggle=<Leader>p
 
 " 基于缩进或语法进行代码折叠
 "set foldmethod=indent
@@ -132,7 +134,7 @@ let g:indexer_dontUpdateTagsIfFileExists = 1
 
 " 设置 tagbar 子窗口的位置出现在主编辑区的左边
 let tagbar_left=1
-" 设置显示／隐藏标签列表子窗口的快捷键。速记：identifier list by tag
+" 设置显示／隐藏标签列表子窗口的快捷键
 nnoremap <Leader>t :TagbarToggle<CR>
 " 设置标签子窗口的宽度
 let tagbar_width=32
@@ -238,13 +240,12 @@ let g:airline#extensions#whitespace#enabled=0
 
 if system.isOSX
   let g:clang_use_library=1
-  let g:clang_library_path='/Users/jian.cao/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/clang/lib/' " '/usr/local/opt/llvm/lib'
+  let g:clang_library_path='$HOME/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/clang/lib/' " '/usr/local/opt/llvm/lib'
 elseif system.isLinux
   let g:clang_use_library=1
-  let g:clang_library_path='/home/jian.cao/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/clang/lib/' " '/usr/local/opt/llvm/lib'
+  let g:clang_library_path='$HOME/.vim/bundle/YouCompleteMe/third_party/ycmd/third_party/clang/lib/' " '/usr/local/opt/llvm/lib'
 endif
 
-" set listchars=tab:»\ ,space:·,trail:•,extends:»,precedes:«
 set listchars=tab:»\ ,space:·,trail:█,extends:»,precedes:«
 " Display unprintable characters
 set list
@@ -294,7 +295,7 @@ let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_enable_diagnostic_highlighting = 0
 
 " 指定.ycm_extra_conf.py
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
+let g:ycm_global_ycm_extra_conf = '$HOME/.ycm_extra_conf.py'
 " let g:ycm_use_clangd = 0
 " debug for YCM
 " let g:ycm_server_keep_logfiles = 1
