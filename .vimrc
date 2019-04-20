@@ -126,6 +126,7 @@ let tagbar_left=1                            " 设置 tagbar出现在主编辑�
 nnoremap <Leader>t :TagbarToggle<CR>
 let tagbar_width=25                          " 设置标签子窗口的宽度
 let g:tagbar_compact=1                       " tagbar子窗口中不显示冗余帮助信息
+let g:tagbar_iconchars = ['▸', '▾']
 
                                              " 设置ctags对哪些代码标识符生成标签
 let g:tagbar_type_cpp = {
@@ -176,6 +177,8 @@ let NERDTreeShowHidden=1                           " 显示隐藏文件
 let NERDTreeMinimalUI=1                            " NERDTree 子窗口中不显示冗余帮助信息
 let NERDTreeAutoDeleteBuffer=1                     " 删除文件时自动删除文件对应 buffer
 let NERDTreeStatusline='Nerdtree'                  " statusline string
+                                                   " 只剩nerdtree窗口时, 关闭vim
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " PlugSetting - gitgutter ------------------------------------------------------
 let g:gitgutter_max_signs=1500
