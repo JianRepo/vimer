@@ -36,6 +36,7 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'Yggdroot/LeaderF'
 Plug 'wsdjeg/FlyGrep.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-startify'
 call plug#end()
 
 " initial setting --------------------------------------------------------------
@@ -256,6 +257,32 @@ let g:ycm_global_ycm_extra_conf = '$HOME/.ycm_extra_conf.py' " 指定.ycm_extra_
 
 " PlugSetting - flygrep --------------------------------------------------------
 nnoremap <Leader>f :FlyGrep<CR>
+
+" PlugSetting - startify --------------------------------------------------------
+let g:startify_lists = [
+      \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+      \ { 'type': 'files',     'header': ['   MRU']            },
+      \ { 'type': 'sessions',  'header': ['   Sessions']       },
+      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+      \ { 'type': 'commands',  'header': ['   Commands']       },
+      \ ]
+let g:startify_padding_left = 20
+let g:startify_custom_header = [
+                \ '                     __    __    _____     __    __      _____   ______   ',
+                \ '                     ) )  ( (   (_   _)    \ \  / /     / ___/  (   __ \  ',
+                \ '                    ( (    ) )    | |      () \/ ()    ( (__     ) (__) ) ',
+                \ '                     \ \  / /     | |      / _  _ \     ) __)   (    __/  ',
+                \ '                      \ \/ /      | |     / / \/ \ \   ( (       ) \ \  _ ',
+                \ '                       \  /      _| |__  /_/      \_\   \ \___  ( ( \ \_))',
+                \ '                        \/      /_____( (/          \)   \____\  )_) \__/ ',
+                \]
+
+let g:startify_custom_footer = [
+            \ '                                  +-----------------------------+',
+            \ '                                  |  Be a voice, not an echo !  |',
+            \ '                                  +-----------------------------+',
+            \]
+
 
 "+--------------+
 "| C风格注释    |
