@@ -16,28 +16,35 @@ let system['isOSX'] = has('macunix')
 
 " PlugList ---------------------------------------------------------------------
 call plug#begin(expand($BUNDLE))
-Plug 'morhetz/gruvbox'
-Plug 'whatyouhide/vim-gotham'
-Plug 'altercation/vim-colors-solarized'
-Plug 'tomasr/molokai'
+Plug 'morhetz/gruvbox'                                  , { 'on': 'colorscheme gruvbox' }
+Plug 'whatyouhide/vim-gotham'                           , { 'on': 'colorscheme gotham256' }
+Plug 'altercation/vim-colors-solarized'                 , { 'on': 'colorscheme solarized' }
+Plug 'tomasr/molokai'                                   , { 'on': 'colorscheme molokai' }
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'                                , { 'on': 'TagbarToggle' }
 Plug 'vim-scripts/indexer.tar.gz'
 Plug 'vim-scripts/DfrankUtil'
 Plug 'vim-scripts/vimprj'
-Plug 'Valloric/YouCompleteMe'
-Plug 'dyng/ctrlsf.vim'
-Plug 'scrooloose/nerdtree'
-Plug 'vim-scripts/DrawIt'
+Plug 'Valloric/YouCompleteMe'                           , { 'on': [] }
+Plug 'dyng/ctrlsf.vim'                                  , { 'on': 'CtrlSF'  }
+Plug 'scrooloose/nerdtree'                              , { 'on': 'NERDTreeToggle' }
+Plug 'vim-scripts/DrawIt'                               , { 'on': 'DrawIt' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
 Plug 'JianRepo/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'Yggdroot/LeaderF'
-Plug 'JianRepo/FlyGrep.vim'
+Plug 'Yggdroot/LeaderF'                                 , { 'on': 'LeaderfFile' }
+Plug 'JianRepo/FlyGrep.vim'                             , { 'on': 'FlyGrep' }
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-startify'
 call plug#end()
+
+" PlugList - lazy load ---------------------------------------------------------
+augroup load_ycm
+    autocmd!
+    autocmd InsertEnter * call plug#load('YouCompleteMe') | autocmd! load_ycm
+augroup END
+
 
 " initial setting --------------------------------------------------------------
 let mapleader=";"                             " 定义快捷键的前缀
