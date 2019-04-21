@@ -263,13 +263,6 @@ let g:spacevim_debug_level = 3
 "let g:spacevim_commandline_prompt = '#'
 
 " PlugSetting - startify --------------------------------------------------------
-let g:startify_lists = [
-      \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-      \ { 'type': 'files',     'header': ['   MRU']            },
-      \ { 'type': 'sessions',  'header': ['   Sessions']       },
-      \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-      \ { 'type': 'commands',  'header': ['   Commands']       },
-      \ ]
 let g:startify_padding_left = 20
 let g:startify_custom_header = [
                 \ '                     __    __    _____     __    __      _____   ______   ',
