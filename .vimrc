@@ -31,10 +31,10 @@ Plug 'scrooloose/nerdtree'
 Plug 'vim-scripts/DrawIt'
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
-Plug 'vim-airline/vim-airline'
+Plug 'JianRepo/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'Yggdroot/LeaderF'
-Plug 'wsdjeg/FlyGrep.vim'
+Plug 'JianRepo/FlyGrep.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-startify'
 call plug#end()
@@ -128,7 +128,7 @@ let g:indexer_dontUpdateTagsIfFileExists = 1
 let tagbar_left=1                            " 设置 tagbar出现在主编辑区的左边
 "                                              列表子窗口的快捷键
 nnoremap <Leader>t :TagbarToggle<CR>
-let tagbar_width=25                          " 设置标签子窗口的宽度
+let tagbar_width=40                          " 设置标签子窗口的宽度
 let g:tagbar_compact=1                       " tagbar子窗口中不显示冗余帮助信息
 let g:tagbar_iconchars = ['▸', '▾']
 
@@ -257,6 +257,10 @@ let g:ycm_global_ycm_extra_conf = '$HOME/.ycm_extra_conf.py' " 指定.ycm_extra_
 
 " PlugSetting - flygrep --------------------------------------------------------
 nnoremap <Leader>f :FlyGrep<CR>
+let g:spacevim_debug_level = 3
+"let g:FlyGrep_input_delay = 50
+"let g:FlyGrep_enable_statusline = 0
+"let g:spacevim_commandline_prompt = '#'
 
 " PlugSetting - startify --------------------------------------------------------
 let g:startify_lists = [
@@ -270,7 +274,7 @@ let g:startify_padding_left = 20
 let g:startify_custom_header = [
                 \ '                     __    __    _____     __    __      _____   ______   ',
                 \ '                     ) )  ( (   (_   _)    \ \  / /     / ___/  (   __ \  ',
-                \ '                    ( (    ) )    | |      () \/ ()    ( (__     ) (__) ) ',
+                \ '                    ( (    ) )    | |       ) \/ (     ( (__     ) (__) ) ',
                 \ '                     \ \  / /     | |      / _  _ \     ) __)   (    __/  ',
                 \ '                      \ \/ /      | |     / / \/ \ \   ( (       ) \ \  _ ',
                 \ '                       \  /      _| |__  /_/      \_\   \ \___  ( ( \ \_))',
@@ -282,7 +286,6 @@ let g:startify_custom_footer = [
             \ '                                  |  Be a voice, not an echo !  |',
             \ '                                  +-----------------------------+',
             \]
-
 
 "+--------------+
 "| C风格注释    |
