@@ -21,7 +21,7 @@ Plug 'whatyouhide/vim-gotham'                           , { 'on': 'colorscheme g
 Plug 'altercation/vim-colors-solarized'                 , { 'on': 'colorscheme solarized' }
 Plug 'tomasr/molokai'                                   , { 'on': 'colorscheme molokai' }
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'majutsushi/tagbar'                                , { 'on': 'TagbarToggle' }
+Plug 'majutsushi/tagbar'
 Plug 'vim-scripts/indexer.tar.gz'
 Plug 'vim-scripts/DfrankUtil'
 Plug 'vim-scripts/vimprj'
@@ -131,6 +131,7 @@ endif
 " 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl
 let g:indexer_ctagsCommandLineOptions="--c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
 let g:indexer_dontUpdateTagsIfFileExists = 1
+
 " PlugSetting - tagbar ---------------------------------------------------------
 let tagbar_left=1                            " 设置 tagbar出现在主编辑区的左边
 "                                              列表子窗口的快捷键
