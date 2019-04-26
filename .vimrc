@@ -22,7 +22,7 @@ Plug 'altercation/vim-colors-solarized'                 , { 'on': 'colorscheme s
 Plug 'tomasr/molokai'                                   , { 'on': 'colorscheme molokai' }
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'majutsushi/tagbar'
-Plug 'vim-scripts/indexer.tar.gz'
+Plug 'vim-scripts/indexer.tar.gz'                       , { 'on': 'VimLeave' }  " not used
 Plug 'vim-scripts/DfrankUtil'
 Plug 'vim-scripts/vimprj'
 Plug 'Valloric/YouCompleteMe'                           , { 'on': [] }
@@ -31,12 +31,18 @@ Plug 'scrooloose/nerdtree'                              , { 'on': 'NERDTreeToggl
 Plug 'vim-scripts/DrawIt'                               , { 'on': 'DrawIt' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'airblade/vim-gitgutter'
-Plug 'JianRepo/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'JianRepo/vim-airline'                             , { 'on': 'VimLeave' }
+Plug 'vim-airline/vim-airline-themes'                   , { 'on': 'VimLeave' }
 Plug 'Yggdroot/LeaderF'                                 , { 'on': 'LeaderfFile' }
 Plug 'JianRepo/FlyGrep.vim'                             , { 'on': 'FlyGrep' }
 Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-startify'
+Plug 'mhinz/vim-startify'                               ", { 'on': 'VimLeave' }
+Plug 'xolox/vim-easytags'                               , { 'on': 'VimLeave' }  " CPU too high
+Plug 'xolox/vim-misc'                                   , { 'on': 'VimLeave' }  " vim-easytags need this plug
+Plug 'vim-scripts/TagHighlight'                         , { 'on': 'VimLeave' }
+Plug 'junegunn/fzf'                                     , { 'dir': '$HOME/.vim/bundle/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'itchyny/lightline.vim'
 call plug#end()
 
 " PlugList - lazy load ---------------------------------------------------------
@@ -45,6 +51,23 @@ augroup load_ycm
     autocmd InsertEnter * call plug#load('YouCompleteMe') | autocmd! load_ycm
 augroup END
 
+" set color
+augroup set_color
+    autocmd!
+    autocmd VimEnter * hi Normal guifg=109 ctermfg=109 | hi! link StartifyFile GruvboxRedBold | syn keyword cType u32 u64 dma_addr_t | autocmd! set_color
+augroup END
+
+" set syn
+augroup set_syn
+    autocmd!
+    autocmd BufEnter * syn keyword cType u32 u64 dma_addr_t autocmd! set_syn
+augroup END
+
+" set syn
+augroup load_tags
+    autocmd!
+    autocmd vimEnter * set tags+=getcwd()/tags | autocmd! load_tags
+augroup END
 
 " initial setting --------------------------------------------------------------
 let mapleader=";"                             " 定义快捷键的前缀
@@ -59,11 +82,16 @@ autocmd BufWritePost $MYVIMRC source $MYVIMRC " 让配置变更立即生效
 
 set listchars=tab:»\ ,space:·,trail:█,extends:»,precedes:«
 set list                                      " 显示不可打印字符
+syntax enable                                 " 开启语法高亮功能
+syntax on                                     " 允许用指定语法高亮配色方案替换默认方案
 
 filetype plugin indent on
 set background=dark                           " 配色方案
 " set background=light
 colorscheme gruvbox
+let g:gruvbox_italic = 1
+let g:gruvbox_italicize_comments = 0
+let g:gruvbox_italicize_strings = 1
 " colorscheme gotham256                       " 夜间
 " colorscheme solarized
 " colorscheme molokai
@@ -91,8 +119,6 @@ set cc=+1
 set hlsearch                                  " 高亮显示搜索结果
 " set guifont=                                " 设置 gvim 显示字体
 set nowrap                                    " 禁止折行
-syntax enable                                 " 开启语法高亮功能
-syntax on                                     " 允许用指定语法高亮配色方案替换默认方案
 
 filetype indent on                            " 自适应不同语言的智能缩进
 " set expandtab                               " 将制表符扩展为空格
@@ -187,8 +213,6 @@ let NERDTreeShowHidden=1                             " 显示隐藏文件
 let NERDTreeMinimalUI=1                              " NERDTree 子窗口中不显示冗余帮助信息
 let NERDTreeAutoDeleteBuffer=1                       " 删除文件时自动删除文件对应 buffer
 let NERDTreeStatusline='Nerdtree'                    " statusline string
-                                                     " 只剩nerdtree窗口时, 关闭vim
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " PlugSetting - gitgutter ------------------------------------------------------
 let g:gitgutter_max_signs=1500
@@ -269,6 +293,18 @@ let g:spacevim_debug_level = 3
 "let g:FlyGrep_input_delay = 50
 "let g:FlyGrep_enable_statusline = 0
 "let g:spacevim_commandline_prompt = '#'
+
+" PlugSetting - tagbar ---------------------------------------------------------
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
 
 " PlugSetting - startify --------------------------------------------------------
 let g:startify_padding_left = 20
