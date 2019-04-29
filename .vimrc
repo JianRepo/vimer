@@ -21,7 +21,7 @@ Plug 'whatyouhide/vim-gotham'                           , { 'on': 'colorscheme g
 Plug 'altercation/vim-colors-solarized'                 , { 'on': 'colorscheme solarized' }
 Plug 'tomasr/molokai'                                   , { 'on': 'colorscheme molokai' }
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'majutsushi/tagbar'
+Plug 'JianRepo/tagbar'
 Plug 'vim-scripts/indexer.tar.gz'                       , { 'on': [] }  " not used
 Plug 'vim-scripts/DfrankUtil'                           , { 'on': [] }
 Plug 'vim-scripts/vimprj'                               , { 'on': [] }
@@ -44,7 +44,8 @@ Plug 'junegunn/fzf'                                     , { 'dir': '$HOME/.vim/b
 Plug 'junegunn/fzf.vim'
 Plug 'JianRepo/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
-Plug 'jeaye/color_coded'
+Plug 'jeaye/color_coded'                                , { 'on' : [] }
+Plug 'mbriggs/mark.vim'
 call plug#end()
 
 " PlugList - lazy load ---------------------------------------------------------
@@ -66,6 +67,7 @@ augroup END
 
 " initial setting --------------------------------------------------------------
 let mapleader=";"                             " 定义快捷键的前缀
+let maplocalleader=","
 set incsearch                                 " 开启实时搜索功能
 set ignorecase                                " 搜索时大小写不敏感
 set nocompatible                              " 关闭兼容模式
@@ -305,6 +307,29 @@ execute 'source' '~/.vim/lightline.vim'
 " mkdir build && cd build
 " cmake -DCUSTOM_CLANG=1 -DLLVM_ROOT_DIR=/usr/local/Cellar/llvm ..
 " make && make install
+
+" PlugSetting - mark ---------------------------------------------------------
+nmap <silent> <localleader>m <Plug>MarkSet
+vmap <silent> <localleader>m <Plug>MarkSet
+nmap <silent> <localleader>r <Plug>MarkRegex
+vmap <silent> <localleader>r <Plug>MarkRegex
+nmap <silent> <localleader>n <Plug>MarkClear
+nmap <silent> <localleader>* <Plug>MarkSearchCurrentNext
+nmap <silent> <localleader># <Plug>MarkSearchCurrentPrev
+nmap <silent> <localleader>/ <Plug>MarkSearchAnyNext
+nmap <silent> <localleader>? <Plug>MarkSearchAnyPrev
+nmap <silent> * <Plug>MarkSearchNext
+nmap <silent> # <Plug>MarkSearchPrev
+" No default mapping for <Plug>MarkAllClear.
+" No default mapping for <Plug>MarkToggle.
+highlight def MarkWord1  ctermbg=Red      ctermfg=Black  guibg=#FF7272    guifg=Black
+highlight def MarkWord2  ctermbg=Magenta  ctermfg=Black  guibg=#FFB3FF    guifg=Black
+highlight def MarkWord3  ctermbg=Cyan     ctermfg=Black  guibg=#8CCBEA    guifg=Black
+highlight def MarkWord4  ctermbg=Green    ctermfg=Black  guibg=#A4E57E    guifg=Black
+highlight def MarkWord5  ctermbg=Blue     ctermfg=Black  guibg=#9999FF    guifg=Black
+highlight def MarkWord6  ctermbg=Yellow   ctermfg=Black  guibg=#FFDB72    guifg=Black
+
+
 
 " PlugSetting - startify --------------------------------------------------------
 let g:startify_padding_left = 20
