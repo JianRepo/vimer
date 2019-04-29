@@ -127,6 +127,7 @@ let g:lightline#bufferline#shorten_path = 1
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#filename_modifier = ':t'  " tabline只显示文件名  :help filename-modifiers
 let g:lightline#bufferline#unnamed      = '[No Name]'
+let g:plug_skip=['nerdtree', 'tagbar', 'startify', 'Mundo', 'MundoDiff']
 let g:lightline#bufferline#number_map = {
       \ 0: '⓿ ', 1: '❶ ', 2: '❷ ', 3: '❸ ', 4: '❹ ',
       \ 5: '❺ ', 6: '❻ ', 7: '❼ ', 8: '❽ ', 9: '❾ '}

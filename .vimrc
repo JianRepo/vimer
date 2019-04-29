@@ -46,6 +46,8 @@ Plug 'JianRepo/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'jeaye/color_coded'                                , { 'on' : [] }
 Plug 'mbriggs/mark.vim'
+Plug 'yonchu/accelerated-smooth-scroll'
+Plug 'simnalamburt/vim-mundo'
 call plug#end()
 
 " PlugList - lazy load ---------------------------------------------------------
@@ -72,6 +74,9 @@ set incsearch                                 " 开启实时搜索功能
 set ignorecase                                " 搜索时大小写不敏感
 set nocompatible                              " 关闭兼容模式
 set wildmenu                                  " vim 自身命令行模式智能补全
+set updatetime=100                            " 刷新时间
+set relativenumber                            " 显示相对行号
+
 "                                             " 关闭当前buffer
 nmap <Leader>bd :bd<CR>
 
@@ -105,7 +110,7 @@ set laststatus=2                              " 总是显示状态栏
 set showtabline=2                             " 总是显示tabline
 set ruler                                     " 显示光标当前位置
 set number                                    " 开启行号显示
-" set cursorline                              " 高亮显示当前行/列
+set cursorline                                " 高亮显示当前行/列
 " set cursorcolumn
 " highlight CursorLine   cterm=NONE ctermbg=red ctermfg=NONE guibg=red guifg=NONE
 " highlight CursorColumn cterm=NONE ctermbg=red ctermfg=NONE guibg=red guifg=red
@@ -160,14 +165,15 @@ let g:indexer_dontUpdateTagsIfFileExists = 1
 let tagbar_left=1                            " 设置 tagbar出现在主编辑区的左边
 "                                              列表子窗口的快捷键
 nnoremap <Leader>t :TagbarToggle<CR>
-let tagbar_width=40                          " 设置标签子窗口的宽度
+let tagbar_width=30                          " 设置标签子窗口的宽度
 let g:tagbar_compact=1                       " tagbar子窗口中不显示冗余帮助信息
 let g:tagbar_iconchars = ['▸', '▾']
-
-let g:tagbar_status_func = 'TagbarStatusFunc'
-function! TagbarStatusFunc(current, sort, fname, ...) abort
-  return '%#LightlineLeft_active_0#%( tagbar %)%#LightlineLeft_active_0_1#'
-endfunction
+" let g:tagbar_autopreview = 1
+let g:tagbar_sort = 0
+"let g:tagbar_status_func = 'TagbarStatusFunc'
+"function! TagbarStatusFunc(current, sort, fname, ...) abort
+"  return '%#LightlineLeft_active_0#%( tagbar %)%#LightlineLeft_active_0_1#'
+"endfunction
 
                                              " 设置ctags对哪些代码标识符生成标签
 let g:tagbar_type_cpp = {
@@ -329,7 +335,12 @@ highlight def MarkWord4  ctermbg=Green    ctermfg=Black  guibg=#A4E57E    guifg=
 highlight def MarkWord5  ctermbg=Blue     ctermfg=Black  guibg=#9999FF    guifg=Black
 highlight def MarkWord6  ctermbg=Yellow   ctermfg=Black  guibg=#FFDB72    guifg=Black
 
-
+nnoremap <Leader>u :MundoToggle<CR>
+let g:mundo_width = 20
+let g:mundo_preview_height = 20
+" let g:mundo_right = 1
+let g:mundo_preview_bottom = 1
+let g:mundo_close_on_revert = 1
 
 " PlugSetting - startify --------------------------------------------------------
 let g:startify_padding_left = 20
