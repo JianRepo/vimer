@@ -22,51 +22,46 @@ Plug 'altercation/vim-colors-solarized'                 , { 'on': 'colorscheme s
 Plug 'tomasr/molokai'                                   , { 'on': 'colorscheme molokai' }
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'majutsushi/tagbar'
-Plug 'vim-scripts/indexer.tar.gz'                       , { 'on': 'VimLeave' }  " not used
-Plug 'vim-scripts/DfrankUtil'
-Plug 'vim-scripts/vimprj'
+Plug 'vim-scripts/indexer.tar.gz'                       , { 'on': [] }  " not used
+Plug 'vim-scripts/DfrankUtil'                           , { 'on': [] }
+Plug 'vim-scripts/vimprj'                               , { 'on': [] }
 Plug 'Valloric/YouCompleteMe'                           , { 'on': [] }
 Plug 'dyng/ctrlsf.vim'                                  , { 'on': 'CtrlSF'  }
 Plug 'scrooloose/nerdtree'                              , { 'on': 'NERDTreeToggle' }
 Plug 'vim-scripts/DrawIt'                               , { 'on': 'DrawIt' }
 Plug 'scrooloose/nerdcommenter'
+Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'JianRepo/vim-airline'                             , { 'on': 'VimLeave' }
-Plug 'vim-airline/vim-airline-themes'                   , { 'on': 'VimLeave' }
+Plug 'JianRepo/vim-airline'                             , { 'on': [] }
+Plug 'vim-airline/vim-airline-themes'                   , { 'on': [] }
 Plug 'Yggdroot/LeaderF'                                 , { 'on': 'LeaderfFile' }
 Plug 'JianRepo/FlyGrep.vim'                             , { 'on': 'FlyGrep' }
-Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-startify'                               ", { 'on': 'VimLeave' }
-Plug 'xolox/vim-easytags'                               , { 'on': 'VimLeave' }  " CPU too high
-Plug 'xolox/vim-misc'                                   , { 'on': 'VimLeave' }  " vim-easytags need this plug
-Plug 'vim-scripts/TagHighlight'                         , { 'on': 'VimLeave' }
+Plug 'mhinz/vim-startify'
+Plug 'xolox/vim-easytags'                               , { 'on': [] }  " CPU too high
+Plug 'xolox/vim-misc'                                   , { 'on': [] }  " vim-easytags need this plug
+Plug 'vim-scripts/TagHighlight'                         , { 'on': [] }
 Plug 'junegunn/fzf'                                     , { 'dir': '$HOME/.vim/bundle/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'itchyny/lightline.vim'
+Plug 'JianRepo/lightline.vim'
+Plug 'mengelbrecht/lightline-bufferline'
+Plug 'jeaye/color_coded'
 call plug#end()
 
 " PlugList - lazy load ---------------------------------------------------------
-augroup load_ycm
+augroup group_exec
     autocmd!
-    autocmd InsertEnter * call plug#load('YouCompleteMe') | autocmd! load_ycm
+    autocmd VimEnter * hi Normal guifg=#83a598 ctermfg=109 | hi! link StartifyFile GruvboxRedBold
+    autocmd vimEnter * set tags+=getcwd()/tags | autocmd! group_exec
 augroup END
 
-" set color
-augroup set_color
+augroup ops_exec
     autocmd!
-    autocmd VimEnter * hi Normal guifg=109 ctermfg=109 | hi! link StartifyFile GruvboxRedBold | syn keyword cType u32 u64 dma_addr_t | autocmd! set_color
+    autocmd InsertEnter * call plug#load('YouCompleteMe') | autocmd! ops_exec
 augroup END
 
-" set syn
 augroup set_syn
     autocmd!
-    autocmd BufEnter * syn keyword cType u32 u64 dma_addr_t autocmd! set_syn
-augroup END
-
-" set syn
-augroup load_tags
-    autocmd!
-    autocmd vimEnter * set tags+=getcwd()/tags | autocmd! load_tags
+    autocmd BufEnter * syn keyword cType u8 u32 u64 dma_addr_t autocmd! set_syn
 augroup END
 
 " initial setting --------------------------------------------------------------
@@ -105,6 +100,7 @@ set guioptions-=R
 set guioptions-=m                             " 禁止显示菜单和工具条
 set guioptions-=T
 set laststatus=2                              " 总是显示状态栏
+set showtabline=2                             " 总是显示tabline
 set ruler                                     " 显示光标当前位置
 set number                                    " 开启行号显示
 " set cursorline                              " 高亮显示当前行/列
@@ -166,6 +162,11 @@ let tagbar_width=40                          " 设置标签子窗口的宽度
 let g:tagbar_compact=1                       " tagbar子窗口中不显示冗余帮助信息
 let g:tagbar_iconchars = ['▸', '▾']
 
+let g:tagbar_status_func = 'TagbarStatusFunc'
+function! TagbarStatusFunc(current, sort, fname, ...) abort
+  return '%#LightlineLeft_active_0#%( tagbar %)%#LightlineLeft_active_0_1#'
+endfunction
+
                                              " 设置ctags对哪些代码标识符生成标签
 let g:tagbar_type_cpp = {
     \ 'kinds' : [
@@ -212,7 +213,7 @@ let NERDTreeWinPos="right"                           " 设置NERDTree子窗口�
 let NERDTreeShowHidden=1                             " 显示隐藏文件
 let NERDTreeMinimalUI=1                              " NERDTree 子窗口中不显示冗余帮助信息
 let NERDTreeAutoDeleteBuffer=1                       " 删除文件时自动删除文件对应 buffer
-let NERDTreeStatusline='Nerdtree'                    " statusline string
+let g:NERDTreeStatusline=' '
 
 " PlugSetting - gitgutter ------------------------------------------------------
 let g:gitgutter_max_signs=1500
@@ -294,17 +295,16 @@ let g:spacevim_debug_level = 3
 "let g:FlyGrep_enable_statusline = 0
 "let g:spacevim_commandline_prompt = '#'
 
-" PlugSetting - tagbar ---------------------------------------------------------
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
-      \ },
-      \ }
+" PlugSetting - lightline ------------------------------------------------------
+execute 'source' '~/.vim/lightline.vim'
+
+" PlugSetting - color_coded ----------------------------------------------------
+" 安装方法
+" cd ~/.vim/bundle/color_coded
+" rm -f CMakeCache.txt
+" mkdir build && cd build
+" cmake -DCUSTOM_CLANG=1 -DLLVM_ROOT_DIR=/usr/local/Cellar/llvm ..
+" make && make install
 
 " PlugSetting - startify --------------------------------------------------------
 let g:startify_padding_left = 20
