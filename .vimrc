@@ -110,7 +110,7 @@ set laststatus=2                              " 总是显示状态栏
 set showtabline=2                             " 总是显示tabline
 set ruler                                     " 显示光标当前位置
 set number                                    " 开启行号显示
-set cursorline                                " 高亮显示当前行/列
+" set cursorline                              " 高亮显示当前行/列
 " set cursorcolumn
 " highlight CursorLine   cterm=NONE ctermbg=red ctermfg=NONE guibg=red guifg=NONE
 " highlight CursorColumn cterm=NONE ctermbg=red ctermfg=NONE guibg=red guifg=red
@@ -226,7 +226,7 @@ let g:NERDTreeStatusline=' '
 " PlugSetting - gitgutter ------------------------------------------------------
 let g:gitgutter_max_signs=1500
 " PlugSetting - airline --------------------------------------------------------
-" nmap <tab> :bn<cr>                                 " 设置tab键映射
+nmap <tab> :bn<cr>                                   " 设置tab键映射
 let g:airline_theme='base16'                         " 'base16_google' 'tomorrow' 'base16_spacemacs' 'base16_monokai' 'papercolor' 'base16'
 let g:airline_powerline_fonts = 1                    " 使用powerline字体
 let g:airline#extensions#tabline#enabled = 1
@@ -256,7 +256,6 @@ nmap <leader>6 <Plug>AirlineSelectTab6
 nmap <leader>7 <Plug>AirlineSelectTab7
 nmap <leader>8 <Plug>AirlineSelectTab8
 nmap <leader>9 <Plug>AirlineSelectTab9
-nmap <tab>     <Plug>AirlineSelectNextTab
 
 " PlugSetting - LeaderfFile ----------------------------------------------------
 nmap <Leader>lf :LeaderfFile<CR>
