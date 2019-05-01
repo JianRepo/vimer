@@ -16,30 +16,30 @@ let system['isOSX'] = has('macunix')
 
 " PlugList ---------------------------------------------------------------------
 call plug#begin(expand($BUNDLE))
-Plug 'morhetz/gruvbox'                                  , { 'on': 'colorscheme gruvbox' }
-Plug 'whatyouhide/vim-gotham'                           , { 'on': 'colorscheme gotham256' }
-Plug 'altercation/vim-colors-solarized'                 , { 'on': 'colorscheme solarized' }
-Plug 'tomasr/molokai'                                   , { 'on': 'colorscheme molokai' }
+Plug 'morhetz/gruvbox'                                  , { 'on' : 'colorscheme gruvbox' }
+Plug 'whatyouhide/vim-gotham'                           , { 'on' : 'colorscheme gotham256' }
+Plug 'altercation/vim-colors-solarized'                 , { 'on' : 'colorscheme solarized' }
+Plug 'tomasr/molokai'                                   , { 'on' : 'colorscheme molokai' }
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'JianRepo/tagbar'
-Plug 'vim-scripts/indexer.tar.gz'                       , { 'on': [] }  " not used
-Plug 'vim-scripts/DfrankUtil'                           , { 'on': [] }
-Plug 'vim-scripts/vimprj'                               , { 'on': [] }
-Plug 'Valloric/YouCompleteMe'                           , { 'on': [] }
-Plug 'dyng/ctrlsf.vim'                                  , { 'on': 'CtrlSF'  }
-Plug 'scrooloose/nerdtree'                              , { 'on': 'NERDTreeToggle' }
-Plug 'vim-scripts/DrawIt'                               , { 'on': 'DrawIt' }
+Plug 'vim-scripts/indexer.tar.gz'                       , { 'on' : [] }  " not used
+Plug 'vim-scripts/DfrankUtil'                           , { 'on' : [] }
+Plug 'vim-scripts/vimprj'                               , { 'on' : [] }
+Plug 'Valloric/YouCompleteMe'                           , { 'on' : [] }
+Plug 'dyng/ctrlsf.vim'                                  , { 'on' : 'CtrlSF'  }
+Plug 'scrooloose/nerdtree'                              , { 'on' : 'NERDTreeToggle' }
+Plug 'vim-scripts/DrawIt'                               , { 'on' : 'DrawIt' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'JianRepo/vim-airline'                             , { 'on': [] }
-Plug 'vim-airline/vim-airline-themes'                   , { 'on': [] }
-Plug 'Yggdroot/LeaderF'                                 , { 'on': 'LeaderfFile' }
-Plug 'JianRepo/FlyGrep.vim'                             , { 'on': 'FlyGrep' }
+Plug 'JianRepo/vim-airline'                             , { 'on' : [] }
+Plug 'vim-airline/vim-airline-themes'                   , { 'on' : [] }
+Plug 'Yggdroot/LeaderF'                                 , { 'on' : 'LeaderfFile' }
+Plug 'JianRepo/FlyGrep.vim'                             , { 'on' : 'FlyGrep' }
 Plug 'mhinz/vim-startify'
-Plug 'xolox/vim-easytags'                               , { 'on': [] }  " CPU too high
-Plug 'xolox/vim-misc'                                   , { 'on': [] }  " vim-easytags need this plug
-Plug 'vim-scripts/TagHighlight'                         , { 'on': [] }
+Plug 'xolox/vim-easytags'                               , { 'on' : [] }  " CPU too high
+Plug 'xolox/vim-misc'                                   , { 'on' : [] }  " vim-easytags need this plug
+Plug 'vim-scripts/TagHighlight'                         , { 'on' : [] }
 Plug 'junegunn/fzf'                                     , { 'dir': '$HOME/.vim/bundle/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'JianRepo/lightline.vim'
@@ -334,6 +334,7 @@ highlight def MarkWord4  ctermbg=Green    ctermfg=Black  guibg=#A4E57E    guifg=
 highlight def MarkWord5  ctermbg=Blue     ctermfg=Black  guibg=#9999FF    guifg=Black
 highlight def MarkWord6  ctermbg=Yellow   ctermfg=Black  guibg=#FFDB72    guifg=Black
 
+" PlugSetting - mundo  ---------------------------------------------------------
 nnoremap <Leader>u :MundoToggle<CR>
 let g:mundo_width = 20
 let g:mundo_preview_height = 20
@@ -341,7 +342,7 @@ let g:mundo_preview_height = 20
 let g:mundo_preview_bottom = 1
 let g:mundo_close_on_revert = 1
 
-" PlugSetting - startify --------------------------------------------------------
+" PlugSetting - startify -------------------------------------------------------
 let g:startify_padding_left = 20
 let g:startify_custom_header = [
                 \ '                     __    __    _____     __    __      _____   ______   ',
@@ -354,17 +355,21 @@ let g:startify_custom_header = [
                 \]
 
 let g:startify_custom_footer = [
-            \ '                                  +-----------------------------+',
-            \ '                                  |  Be a voice, not an echo !  |',
-            \ '                                  +-----------------------------+',
-            \]
+                \ '                                +-----------------------------+',
+                \ '                                |  Be a voice, not an echo !  |',
+                \ '                                +-----------------------------+',
+                \]
 
-"+--------------+
-"| C风格注释    |
-"| <leader>cs   |
-"| 取消注释     |
-"| <leader>cu   |
-"+--------------+
-"| 画图注释     |
-"| :Distart     |
-"+--------------+
+
+
+
+"                +-------------------------+
+"                |        C风格注释        |
+"                |        <Leader>cs       |
+"                |        取消注释         |
+"                |        <Leader>cu       |
+"                +-------------------------+
+"                |        画图注释         |
+"                |        :Distart         |
+"                |        :Disop           |
+"                +-------------------------+
