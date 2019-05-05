@@ -36,7 +36,7 @@ let g:lightline = {
 
 function! LightlineMode()
   let nr = s:get_buffer_number()
-  let nmap_num = [ '⓿ ', '❶ ', '❷ ', '❸ ', '❹ ','❺ ', '❻ ', '❼ ', '❽ ', '❾ ','➓ ','⓫ ','⓬ ','⓭ ','⓮ ','⓯ ','⓰ ','⓱ ','⓲ ','⓳ ','⓴ ']
+  let nmap_num = [ '⓪ ', '① ', '② ', '③ ', '④ ', '⑤ ', '⑥ ', '⑦ ', '⑧ ', '⑨]' ]
   if nr == 0
     return ''
   endif
@@ -129,8 +129,11 @@ let g:lightline#bufferline#filename_modifier = ':t'  " tabline只显示文件名
 let g:lightline#bufferline#unnamed      = '[No Name]'
 let g:plug_skip=['nerdtree', 'tagbar', 'startify', 'Mundo', 'MundoDiff']
 let g:lightline#bufferline#number_map = {
-      \ 0: '⓿ ', 1: '❶ ', 2: '❷ ', 3: '❸ ', 4: '❹ ',
-      \ 5: '❺ ', 6: '❻ ', 7: '❼ ', 8: '❽ ', 9: '❾ '}
+       \ 0: '₀', 1: '₁', 2: '₂', 3: '₃', 4: '₄',
+       \ 5: '₅', 6: '₆', 7: '₇', 8: '₈', 9: '₉'}
+"let g:lightline#bufferline#number_map = {
+"      \ 0: '⓿ ', 1: '❶ ', 2: '❷ ', 3: '❸ ', 4: '❹ ',
+"      \ 5: '❺ ', 6: '❻ ', 7: '❼ ', 8: '❽ ', 9: '❾ '}
 
 nmap <Leader>1 <Plug>lightline#bufferline#go(1)
 nmap <Leader>2 <Plug>lightline#bufferline#go(2)
@@ -141,4 +144,3 @@ nmap <Leader>6 <Plug>lightline#bufferline#go(6)
 nmap <Leader>7 <Plug>lightline#bufferline#go(7)
 nmap <Leader>8 <Plug>lightline#bufferline#go(8)
 nmap <Leader>9 <Plug>lightline#bufferline#go(9)
-nmap <Leader>0 <Plug>lightline#bufferline#go(10)

@@ -64,7 +64,7 @@ augroup END
 
 augroup set_syn
     autocmd!
-    autocmd BufEnter * syn keyword cType u8 u32 u64 dma_addr_t autocmd! set_syn
+    autocmd BufEnter * syn keyword cType u8 s8 u16 s16 u32 s32 u64 s64 dma_addr_t autocmd! set_syn
 augroup END
 
 " initial setting --------------------------------------------------------------
