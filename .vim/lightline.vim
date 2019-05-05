@@ -36,7 +36,7 @@ let g:lightline = {
 
 function! LightlineMode()
   let nr = s:get_buffer_number()
-  let nmap_num = [ '⓪ ', '① ', '② ', '③ ', '④ ', '⑤ ', '⑥ ', '⑦ ', '⑧ ', '⑨]' ]
+  let nmap_num = [ '⓪ ', '① ', '② ', '③ ', '④ ', '⑤ ', '⑥ ', '⑦ ', '⑧ ', '⑨' ]
   if nr == 0
     return ''
   endif
