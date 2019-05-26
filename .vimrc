@@ -367,7 +367,7 @@ let g:startify_custom_footer = [
                 \]
 
 " PlugSetting - fzf ------------------------------------------------------------
-execute 'source' '~/.vim/fzf.vim'
+" execute 'source' '~/.vim/fzf.vim'
 
 "                +-------------------------+
 "                |        C风格注释        |
