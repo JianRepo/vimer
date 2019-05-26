@@ -25,6 +25,7 @@ let g:lightline = {
       \   'paste': 'PasteMode',
       \   'fugitive': 'LightLineFugitive',
       \   'gitgutter': 'LightLineGitGutter',
+      \   'filename' : 'LightLineFilename',
       \   'readonly': 'LightLineReadonly',
       \   'filetype': 'LightLineFiletype',
       \   'tagbar': 'Currenttag',
@@ -46,7 +47,7 @@ function! LightlineMode()
     let l:result = get(nmap_num, l:number % 10, l:number % 10) . l:result
     let l:number = l:number / 10
   endfor
-  return join([lightline#mode()[0],l:result])
+  return nr "join([lightline#mode()[0],l:result])
 endfunction
 
 function! PasteMode()
@@ -112,10 +113,16 @@ function! LightLineGitGutter()
 endfunction
 
 function! LightLineFilename()
-  return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-        \ ('' != expand('%:t') ? expand('%:t') : '') .
-        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+  return winwidth(0) > 150 ?
+         \ substitute(expand('%:f'), getcwd().'/', "", "g") :
+         \ winwidth(0) > 100 ? expand('%:t') : ''
 endfunction
+
+" function! LightLineFilename()
+"   return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+"         \ ('' != expand('%:t') ? expand('%:t') : '') .
+"         \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+" endfunction
 
 function! LightLineFiletype()
   return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . '') : ''

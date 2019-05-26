@@ -21,7 +21,7 @@ Plug 'whatyouhide/vim-gotham'                           , { 'on' : 'colorscheme 
 Plug 'altercation/vim-colors-solarized'                 , { 'on' : 'colorscheme solarized' }
 Plug 'tomasr/molokai'                                   , { 'on' : 'colorscheme molokai' }
 Plug 'octol/vim-cpp-enhanced-highlight'
-Plug 'JianRepo/tagbar'
+Plug 'YCbCr/tagbar'
 Plug 'vim-scripts/indexer.tar.gz'                       , { 'on' : [] }  " not used
 Plug 'vim-scripts/DfrankUtil'                           , { 'on' : [] }
 Plug 'vim-scripts/vimprj'                               , { 'on' : [] }
@@ -32,17 +32,17 @@ Plug 'vim-scripts/DrawIt'                               , { 'on' : 'DrawIt' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'JianRepo/vim-airline'                             , { 'on' : [] }
+Plug 'YCbCr/vim-airline'                                , { 'on' : [] }
 Plug 'vim-airline/vim-airline-themes'                   , { 'on' : [] }
 Plug 'Yggdroot/LeaderF'                                 , { 'on' : 'LeaderfFile' }
-Plug 'JianRepo/FlyGrep.vim'                             , { 'on' : 'FlyGrep' }
+Plug 'YCbCr/FlyGrep.vim'                                , { 'on' : 'FlyGrep' }
 Plug 'mhinz/vim-startify'
 Plug 'xolox/vim-easytags'                               , { 'on' : [] }  " CPU too high
 Plug 'xolox/vim-misc'                                   , { 'on' : [] }  " vim-easytags need this plug
 Plug 'vim-scripts/TagHighlight'                         , { 'on' : [] }
 Plug 'junegunn/fzf'                                     , { 'dir': '$HOME/.vim/bundle/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'JianRepo/lightline.vim'
+Plug 'YCbCr/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'jeaye/color_coded'                                , { 'on' : [] }
 Plug 'mbriggs/mark.vim'
@@ -68,6 +68,7 @@ augroup set_syn
 augroup END
 
 " initial setting --------------------------------------------------------------
+set ff=unix                                   " 避免DOS结尾报错(^M)
 let mapleader=";"                             " 定义快捷键的前缀
 let maplocalleader=","
 set incsearch                                 " 开启实时搜索功能
@@ -133,6 +134,8 @@ set pastetoggle=<Leader>p                     " paste 模式
 set foldmethod=syntax
 set nofoldenable                              " 启动 vim 时关闭折叠代码
 
+noremap oo o<esc>                             " 加入空行, 不进insert模式
+noremap OO O<esc>
 nmap <Leader>j :tnext<CR>
 nmap <Leader>k :tprevious<CR>
 nmap <Leader>q :q<CR>
@@ -230,7 +233,7 @@ nmap <tab> :bn<cr>                                   " 设置tab键映射
 let g:airline_theme='base16'                         " 'base16_google' 'tomorrow' 'base16_spacemacs' 'base16_monokai' 'papercolor' 'base16'
 let g:airline_powerline_fonts = 1                    " 使用powerline字体
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#whitespace#enabled=0        " 关闭状态栏whitespace提示
+"let g:airline#extensions#whitespace#enabled=0        " 关闭状态栏whitespace提示
 " let g:airline#extensions#tabline#show_tab_type = 1 " 打开下面这个选项会显示标签类型-->去掉右上角[buffers]
 
 let g:airline#extensions#tabline#buffer_idx_mode = 1
@@ -367,6 +370,8 @@ let g:startify_custom_footer = [
                 \]
 
 " PlugSetting - fzf ------------------------------------------------------------
+
+
 " execute 'source' '~/.vim/fzf.vim'
 
 "                +-------------------------+
