@@ -25,7 +25,7 @@ Plug 'JianRepo/tagbar'
 Plug 'vim-scripts/indexer.tar.gz'                       , { 'on' : [] }  " not used
 Plug 'vim-scripts/DfrankUtil'                           , { 'on' : [] }
 Plug 'vim-scripts/vimprj'                               , { 'on' : [] }
-Plug 'Valloric/YouCompleteMe'                           , { 'on' : [] }
+Plug 'Valloric/YouCompleteMe'                           ", { 'on' : [] }
 Plug 'dyng/ctrlsf.vim'                                  , { 'on' : 'CtrlSF'  }
 Plug 'scrooloose/nerdtree'                              , { 'on' : 'NERDTreeToggle' }
 Plug 'vim-scripts/DrawIt'                               , { 'on' : 'DrawIt' }
@@ -46,7 +46,7 @@ Plug 'JianRepo/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'jeaye/color_coded'                                , { 'on' : [] }
 Plug 'mbriggs/mark.vim'
-Plug 'yonchu/accelerated-smooth-scroll'
+Plug 'yonchu/accelerated-smooth-scroll'                 ", { 'on' : [] }
 Plug 'simnalamburt/vim-mundo'
 call plug#end()
 
@@ -57,10 +57,10 @@ augroup group_exec
     autocmd vimEnter * set tags+=getcwd()/tags | autocmd! group_exec
 augroup END
 
-augroup ops_exec
-    autocmd!
-    autocmd InsertEnter * call plug#load('YouCompleteMe') | autocmd! ops_exec
-augroup END
+"augroup ops_exec
+"    autocmd!
+"    autocmd InsertEnter * call plug#load('YouCompleteMe') | autocmd! ops_exec
+"augroup END
 
 augroup set_syn
     autocmd!
@@ -319,12 +319,15 @@ vmap <silent> <localleader>m <Plug>MarkSet
 nmap <silent> <localleader>r <Plug>MarkRegex
 vmap <silent> <localleader>r <Plug>MarkRegex
 nmap <silent> <localleader>n <Plug>MarkClear
-nmap <silent> <localleader>* <Plug>MarkSearchCurrentNext
-nmap <silent> <localleader># <Plug>MarkSearchCurrentPrev
+" nmap <silent> <localleader>* <Plug>MarkSearchCurrentNext
+" nmap <silent> <localleader># <Plug>MarkSearchCurrentPrev
+nmap <silent> <localleader>8 <Plug>MarkSearchCurrentNext
+nmap <silent> <localleader>3 <Plug>MarkSearchCurrentPrev
 nmap <silent> <localleader>/ <Plug>MarkSearchAnyNext
 nmap <silent> <localleader>? <Plug>MarkSearchAnyPrev
 nmap <silent> * <Plug>MarkSearchNext
 nmap <silent> # <Plug>MarkSearchPrev
+nmap <silent> <localleader>c <Plug>MarkAllClear
 " No default mapping for <Plug>MarkAllClear.
 " No default mapping for <Plug>MarkToggle.
 highlight def MarkWord1  ctermbg=Red      ctermfg=Black  guibg=#FF7272    guifg=Black
@@ -341,9 +344,12 @@ let g:mundo_preview_height = 20
 " let g:mundo_right = 1
 let g:mundo_preview_bottom = 1
 let g:mundo_close_on_revert = 1
+set undofile
+set undodir=~/.vim/undo
 
 " PlugSetting - startify -------------------------------------------------------
 let g:startify_padding_left = 20
+let g:startify_change_to_dir =0
 let g:startify_custom_header = [
                 \ '                     __    __    _____     __    __      _____   ______   ',
                 \ '                     ) )  ( (   (_   _)    \ \  / /     / ___/  (   __ \  ',
@@ -360,8 +366,8 @@ let g:startify_custom_footer = [
                 \ '                                +-----------------------------+',
                 \]
 
-
-
+" PlugSetting - fzf ------------------------------------------------------------
+execute 'source' '~/.vim/fzf.vim'
 
 "                +-------------------------+
 "                |        C风格注释        |
