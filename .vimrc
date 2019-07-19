@@ -48,6 +48,8 @@ Plug 'jeaye/color_coded'                                , { 'on' : [] }
 Plug 'mbriggs/mark.vim'
 Plug 'yonchu/accelerated-smooth-scroll'                 ", { 'on' : [] }
 Plug 'simnalamburt/vim-mundo'
+Plug 'vim-scripts/LargeFile'
+Plug 'edkolev/tmuxline.vim'
 call plug#end()
 
 " PlugList - lazy load ---------------------------------------------------------
@@ -94,7 +96,7 @@ set background=dark                           " 配色方案
 colorscheme gruvbox
 let g:gruvbox_italic = 1
 let g:gruvbox_italicize_comments = 0
-let g:gruvbox_italicize_strings = 1
+" let g:gruvbox_italicize_strings = 1
 " colorscheme gotham256                       " 夜间
 " colorscheme solarized
 " colorscheme molokai
@@ -229,36 +231,36 @@ let g:NERDTreeStatusline=' '
 " PlugSetting - gitgutter ------------------------------------------------------
 let g:gitgutter_max_signs=1500
 " PlugSetting - airline --------------------------------------------------------
-nmap <tab> :bn<cr>                                   " 设置tab键映射
-let g:airline_theme='base16'                         " 'base16_google' 'tomorrow' 'base16_spacemacs' 'base16_monokai' 'papercolor' 'base16'
-let g:airline_powerline_fonts = 1                    " 使用powerline字体
-let g:airline#extensions#tabline#enabled = 1
-"let g:airline#extensions#whitespace#enabled=0        " 关闭状态栏whitespace提示
-" let g:airline#extensions#tabline#show_tab_type = 1 " 打开下面这个选项会显示标签类型-->去掉右上角[buffers]
-
-let g:airline#extensions#tabline#buffer_idx_mode = 1
-let g:airline#extensions#tabline#buffer_idx_format = {
-        \  '1': '❶ ',
-        \  '2': '❷ ',
-        \  '3': '❸ ',
-        \  '4': '❹ ',
-        \  '5': '❺ ',
-        \  '6': '❻ ',
-        \  '7': '❼ ',
-        \  '8': '❽ ',
-        \  '9': '❾ ',
-        \ '10': '➓ '
-        \}
-
-nmap <leader>1 <Plug>AirlineSelectTab1
-nmap <leader>2 <Plug>AirlineSelectTab2
-nmap <leader>3 <Plug>AirlineSelectTab3
-nmap <leader>4 <Plug>AirlineSelectTab4
-nmap <leader>5 <Plug>AirlineSelectTab5
-nmap <leader>6 <Plug>AirlineSelectTab6
-nmap <leader>7 <Plug>AirlineSelectTab7
-nmap <leader>8 <Plug>AirlineSelectTab8
-nmap <leader>9 <Plug>AirlineSelectTab9
+" nmap <tab> :bn<cr>                                   " 设置tab键映射
+" let g:airline_theme='base16'                         " 'base16_google' 'tomorrow' 'base16_spacemacs' 'base16_monokai' 'papercolor' 'base16'
+" let g:airline_powerline_fonts = 1                    " 使用powerline字体
+" let g:airline#extensions#tabline#enabled = 1
+" "let g:airline#extensions#whitespace#enabled=0        " 关闭状态栏whitespace提示
+" " let g:airline#extensions#tabline#show_tab_type = 1 " 打开下面这个选项会显示标签类型-->去掉右上角[buffers]
+"
+" let g:airline#extensions#tabline#buffer_idx_mode = 1
+" let g:airline#extensions#tabline#buffer_idx_format = {
+"         \  '1': '❶ ',
+"         \  '2': '❷ ',
+"         \  '3': '❸ ',
+"         \  '4': '❹ ',
+"         \  '5': '❺ ',
+"         \  '6': '❻ ',
+"         \  '7': '❼ ',
+"         \  '8': '❽ ',
+"         \  '9': '❾ ',
+"         \ '10': '➓ '
+"         \}
+"
+" nmap <leader>1 <Plug>AirlineSelectTab1
+" nmap <leader>2 <Plug>AirlineSelectTab2
+" nmap <leader>3 <Plug>AirlineSelectTab3
+" nmap <leader>4 <Plug>AirlineSelectTab4
+" nmap <leader>5 <Plug>AirlineSelectTab5
+" nmap <leader>6 <Plug>AirlineSelectTab6
+" nmap <leader>7 <Plug>AirlineSelectTab7
+" nmap <leader>8 <Plug>AirlineSelectTab8
+" nmap <leader>9 <Plug>AirlineSelectTab9
 
 " PlugSetting - LeaderfFile ----------------------------------------------------
 nmap <Leader>lf :LeaderfFile<CR>
@@ -349,6 +351,19 @@ let g:mundo_preview_bottom = 1
 let g:mundo_close_on_revert = 1
 set undofile
 set undodir=~/.vim/undo
+
+" PlugSetting - mundo  ---------------------------------------------------------
+let g:LargeFile = 2
+
+" PlugSetting - tmuxline  ------------------------------------------------------
+" Tmuxline lightline
+let g:tmuxline_preset = 'nightly_fox'
+let g:tmuxline_preset = {
+      \'b'    : '#W',
+      \'win'  : '#I #S',
+      \'cwin' : '#I #S',
+      \'x'    : '%a',
+      \'y'    : '%R'}
 
 " PlugSetting - startify -------------------------------------------------------
 let g:startify_padding_left = 20
