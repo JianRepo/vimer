@@ -1,4 +1,3 @@
-" download vim-plug and source it
 let $BUNDLE = expand("$HOME/.vim/bundle")
 let $PLUG_DIR = expand("$BUNDLE/vim-plug")
 
@@ -22,10 +21,10 @@ Plug 'altercation/vim-colors-solarized'                 , { 'on' : 'colorscheme 
 Plug 'tomasr/molokai'                                   , { 'on' : 'colorscheme molokai' }
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'YCbCr/tagbar'
-Plug 'vim-scripts/indexer.tar.gz'                       , { 'on' : [] }  " not used
-Plug 'vim-scripts/DfrankUtil'                           , { 'on' : [] }
-Plug 'vim-scripts/vimprj'                               , { 'on' : [] }
-Plug 'Valloric/YouCompleteMe'                           ", { 'on' : [] }
+Plug 'vim-scripts/indexer.tar.gz'
+Plug 'vim-scripts/DfrankUtil'
+Plug 'vim-scripts/vimprj'
+Plug 'Valloric/YouCompleteMe'                           , { 'on' : [] } " CPU too high
 Plug 'dyng/ctrlsf.vim'                                  , { 'on' : 'CtrlSF'  }
 Plug 'scrooloose/nerdtree'                              , { 'on' : 'NERDTreeToggle' }
 Plug 'vim-scripts/DrawIt'                               , { 'on' : 'DrawIt' }
@@ -38,7 +37,7 @@ Plug 'Yggdroot/LeaderF'                                 , { 'on' : 'LeaderfFile'
 Plug 'YCbCr/FlyGrep.vim'                                , { 'on' : 'FlyGrep' }
 Plug 'mhinz/vim-startify'
 Plug 'xolox/vim-easytags'                               , { 'on' : [] }  " CPU too high
-Plug 'xolox/vim-misc'                                   , { 'on' : [] }  " vim-easytags need this plug
+Plug 'xolox/vim-misc'                                   , { 'on' : [] }  " vim-easytags need this plugin
 Plug 'vim-scripts/TagHighlight'                         , { 'on' : [] }
 Plug 'junegunn/fzf'                                     , { 'dir': '$HOME/.vim/bundle/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -46,10 +45,23 @@ Plug 'YCbCr/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'jeaye/color_coded'                                , { 'on' : [] }
 Plug 'mbriggs/mark.vim'
-Plug 'yonchu/accelerated-smooth-scroll'                 ", { 'on' : [] }
+Plug 'yonchu/accelerated-smooth-scroll'
 Plug 'simnalamburt/vim-mundo'
 Plug 'vim-scripts/LargeFile'
 Plug 'edkolev/tmuxline.vim'
+
+" SnipMate 携带的四个插件
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
+
+" Jedi
+Plug 'davidhalter/jedi-vim'
+
+" EasyComplete 插件和 Dictionary 词表
+Plug 'jayli/vim-easycomplete'
+Plug 'jayli/vim-dictionary'                             , { 'on' : [] } " bad performance when opening
 call plug#end()
 
 " PlugList - lazy load ---------------------------------------------------------
@@ -86,6 +98,7 @@ nmap <Leader>bd :bd<CR>
 autocmd BufWritePost $MYVIMRC source $MYVIMRC " 让配置变更立即生效
 
 set listchars=tab:»\ ,space:·,trail:█,extends:»,precedes:«
+" set listchars=tab:-\ ,space:-,trail:@,extends:>,precedes:<
 set list                                      " 显示不可打印字符
 syntax enable                                 " 开启语法高亮功能
 syntax on                                     " 允许用指定语法高亮配色方案替换默认方案
@@ -113,13 +126,15 @@ set laststatus=2                              " 总是显示状态栏
 set showtabline=2                             " 总是显示tabline
 set ruler                                     " 显示光标当前位置
 set number                                    " 开启行号显示
-" set cursorline                              " 高亮显示当前行/列
-" set cursorcolumn
+"set cursorline                              " 高亮显示当前行/列
+"set cursorcolumn
 " highlight CursorLine   cterm=NONE ctermbg=red ctermfg=NONE guibg=red guifg=NONE
 " highlight CursorColumn cterm=NONE ctermbg=red ctermfg=NONE guibg=red guifg=red
 
-set textwidth=80                              " 80字符提示
-set cc=+1
+"set textwidth=80                              " 80字符提示 (满80自动换行)
+"set cc=+1
+set cc=81                                      " 80字符提示
+
 " hi ColorColumn ctermbg=23 guibg=green
 
 set hlsearch                                  " 高亮显示搜索结果
@@ -163,7 +178,7 @@ endif
 " PlugSetting - indexer --------------------------------------------------------
 " 默认 --c++-kinds=+p+l，重新设置为 --c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v
 " 默认 --fields=+iaS 不满足 YCM 要求，需改为 --fields=+iaSl
-let g:indexer_ctagsCommandLineOptions="--c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q"
+let g:indexer_ctagsCommandLineOptions="--c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v --fields=+iaSl --extra=+q --language-force=c++ --exclude=*.so --exclude=*.o --exclude=*.builtin --exclude=*.order --exclude=*.patch"
 let g:indexer_dontUpdateTagsIfFileExists = 1
 
 " PlugSetting - tagbar ---------------------------------------------------------
@@ -218,6 +233,9 @@ let g:tagbar_type_cpp = {
 " PlugSetting - ctrlsf ---------------------------------------------------------
 nnoremap <Leader>s :CtrlSF<CR>
 let g:ctrlsf_ackprg = 'ag'                           " 指定搜索工具
+let g:ctrlsf_auto_focus = {
+    \ "at": "start"
+    \ }
 
 " PlugSetting - nerdtree -------------------------------------------------------
 nmap <Leader>n :NERDTreeToggle<CR>
@@ -359,11 +377,15 @@ let g:LargeFile = 2
 " Tmuxline lightline
 let g:tmuxline_preset = 'nightly_fox'
 let g:tmuxline_preset = {
-      \'b'    : '#W',
-      \'win'  : '#I #S',
-      \'cwin' : '#I #S',
-      \'x'    : '%a',
-      \'y'    : '%R'}
+      \'b'    : 'Session|#S',
+      \'win'  : '#I',
+      \'cwin' : '#I',
+      \'y'    : '%a|%m-%d|%H:%M'}
+
+
+" PlugSetting - EasyComplete ---------------------------------------------------
+imap <Tab>   <Plug>EasyCompTabTrigger
+let g:pmenu_scheme = 'dark'
 
 " PlugSetting - startify -------------------------------------------------------
 let g:startify_padding_left = 20
@@ -382,6 +404,32 @@ let g:startify_custom_footer = [
                 \ '                                +-----------------------------+',
                 \ '                                |  Be a voice, not an echo !  |',
                 \ '                                +-----------------------------+',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
+                \ '                                                               ',
                 \]
 
 " PlugSetting - fzf ------------------------------------------------------------

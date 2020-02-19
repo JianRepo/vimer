@@ -1,0 +1,47 @@
+#! /bin/bash
+
+processbar() {
+  while true
+  do
+    for i in '.' '..' '...' '....' '.....' '......' '.......' '.......' '.......'
+      do
+        for j in '-' '\' '|' '/' '-' '\' '|' '/' '-' '\' '|' '/' '-' '\' '|' '/' '-'
+        do
+          printf "                              \r"
+          printf "\e[0;32m updating: %s%s\r\e[0m" $i $j
+          sleep 0.1
+        done
+      done
+  done
+}
+
+proj_path=$(readlink -f `pwd`)
+tag_dir=$HOME/.indexer_files_tags
+# 0. replace ". / -" with "_" for tag name
+tag_file=$tag_dir/${proj_path//[.\/-]/_}
+tag_flag="--sort=yes                               \
+          --c++-kinds=+p+l+x+c+d+e+f+g+m+n+s+t+u+v \
+          --fields=+iaSl                           \
+          --extra=+q"
+indexer_files=$HOME/.indexer_files
+
+# 1. delete tags under proj
+[ -f $proj_path/tags ] && rm $proj_path/tags
+
+# 2. update tag
+echo -e "\e[0;32m tag file: ${tag_file##*/}\e[0m"
+processbar &
+BAR_PID=$!
+ctags -f $tag_file $tag_flag -R -a $proj_path
+kill -PIPE $BAR_PID
+echo -e -n "                      \r"
+echo -e "\e[0;32m done\e[0m"
+
+# 3. write tag info to $HOME/.indexer_files
+grep -w $proj_path $indexer_files > /dev/null
+if [ $? -ne 0 ]; then
+  echo "[$proj_path]" >> $indexer_files
+  echo $proj_path >> $indexer_files
+  echo >> $indexer_files
+  echo -e "\e[0;32m proj_path: $proj_path\e[0m"
+fi
